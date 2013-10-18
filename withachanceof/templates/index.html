@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="shortcut icon" href="images/favicon.png">
+
+      <title>Signin Template for Bootstrap</title>
+
+      <!-- Bootstrap core CSS -->
+      <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+
+      <!-- Custom styles for this template -->
+      <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+   </head>
+
+   <body>
+      <div class="index-container">
+         {% if error %}
+            <div>
+               {% if error.errno == 4 %}
+                  <h4>Location not found</h4>
+               {% else %}
+                  <h4>{{error.message}} - errno: {{error.errno}}</h4>
+               {% endif %}
+            </div>
+         {% endif %}
+
+         <img src="{{ url_for('static', filename='images/index_logo.png') }}"/>
+
+         <form class="form-signin" action="/weather" method="GET">
+            <input type="text" class="form-control" name="location" placeholder="City or zip code" autofocus>
+         </form>
+      </div>
+   </body>
+</html>

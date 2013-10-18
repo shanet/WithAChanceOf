@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Grid Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static', filename='css/weather.css')}}" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+
+      <h3>Weather forecast for {{forecast.location.city}}</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div id="weather-icon-container">
+            <img id="weather-icon" src="{{url_for('static', filename='images/weather-icons/sunny.svg')}}" />
+            <!--Icon: {{forecast.forecast['currently']['icon']}} with {{forecast.forecast['currently']['precipType']}}-->
+          </div>
+          
+          <div id="current-summary">
+            {{forecast.forecast['currently']['temperature']}}F and {{forecast.forecast['currently']['summary'].lower()}}
+          </div>
+
+          <div id="current-rain-wind">
+            Precip {{forecast.forecast['currently']['precipProbability']}}% | Wind: {{forecast.forecast['currently']['windSpeed']}}mph
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">Hourly</div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          {% for i in range(0, 5) %}
+            <div class="row">
+              <div class="col-md-12">
+                High: {{forecast.forecast['daily']['data'][i]['temperatureMax']}}
+                Low: {{forecast.forecast['daily']['data'][i]['temperatureMin']}}
+                {{forecast.forecast['daily']['data'][i]['summary']}}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div style="height: 300px">
+            <h3>Radar/satellite map placeholder</h3>
+          </div>
+        </div>
+      </div>
+
+
+      <h3>Debug Info</h3>
+      <hr />
+
+      <div class="row">
+        <div class="col-md-12">
+          {{forecast.forecast['hourly']}}
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
