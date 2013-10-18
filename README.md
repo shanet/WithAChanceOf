@@ -1,12 +1,13 @@
 WithAChanceOf.com
 =================
 
-
 #### shane tully
 #### shanetully.com
 
 
-WIP...
+WithAChanceOf.com is a no bullshit weather website. Enter your location, get the weather. Nothing else.
+
+It's a work in progress and not hosted anywhere yet.
 
 
 ### License
