@@ -9,14 +9,13 @@
 
       <title>Signin Template for Bootstrap</title>
 
-      <!-- Bootstrap core CSS -->
       <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
-
-      <!-- Custom styles for this template -->
       <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
    </head>
 
    <body>
+      <canvas id="bgCanvas"></canvas>
+
       <div class="index-container">
          {% if error %}
             <div>
@@ -34,5 +33,31 @@
             <input type="text" class="form-control" name="location" placeholder="City or zip code" autofocus>
          </form>
       </div>
+
+      <script type="text/javascript">
+         var canvas = document.getElementById("bgCanvas");
+         canvas.width = window.innerWidth;
+         canvas.height = window.innerHeight;
+
+         var context = canvas.getContext("2d");
+
+         // Draw the sky
+         context.rect(0, 0, canvas.width, canvas.height);
+         context.fillStyle ="#5964D8";
+         context.fill()
+         
+         // Draw the grass
+         context.beginPath();
+         context.arc(canvas.width/2, canvas.height*4.25, canvas.width*2, Math.PI, 0, false);
+         context.fillStyle ="#36BF3F";
+         context.fill();
+
+         // Draw the sun
+         context.beginPath();
+         context.arc(canvas.width-canvas.width/5, canvas.height/5, 150, 0, Math.PI*2, false);
+         context.fillStyle ="#F2EF3F";
+         context.fill();
+
+      </script>
    </body>
 </html>
