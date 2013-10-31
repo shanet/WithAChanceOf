@@ -1,0 +1,3 @@
+[submodule "withachanceof/static/js/skycons"]
+	path = withachanceof/static/js/skycons
+	url = git@github.com:darkskyapp/skycons.git
