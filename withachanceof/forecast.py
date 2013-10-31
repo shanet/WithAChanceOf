@@ -7,6 +7,17 @@ import errors
 from location import Location
 
 class Forecast(object):
+    skyconsConstantsMap = {"clear-day": "Skycons.CLEAR_DAY",
+        "clear-night": "Skycons.CLEAR_NIGHT",
+        "partly-cloudy-day": "Skycons.PARTLY_CLOUDY_DAY",
+        "partly-cloudy-night": "Skycons.PARTLY_CLOUDY_NIGHT",
+        "cloudy": "Skycons.CLOUDY",
+        "rain": "Skycons.RAIN",
+        "sleet": "Skycons.SLEET",
+        "snow": "Skycons.SNOW",
+        "wind": "Skycons.WIND",
+        "fog": "Skycons.FOG",
+    }
 
     def __init__(self, location):
         db = database.ZipcodeDb()
@@ -41,3 +52,10 @@ class Forecast(object):
             self.forecast = json.loads(response)
         except Exception as e:
             raise errors.GetForecastError(str(e), constants.ERROR_GET_FORECAST_NETWORK_ERROR)
+
+
+    def getCurrentWeatherSkyconsConstant(self):
+        return self.skyconsConstantsMap[self.forecast['currently']['icon']]
+
+    def getSkyconsConstantForDay(self, dayNumber):
+        return self.skyconsConstantsMap[self.forecast['daily']['data'][dayNumber]['icon']]

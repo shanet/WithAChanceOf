@@ -6,13 +6,16 @@
 h4 {
   margin-top: 25px;
 }
+
 .row {
   margin-bottom: 20px;
 }
+
 .row .row {
   margin-top: 10px;
   margin-bottom: 0;
 }
+
 [class*="col-"] {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -20,11 +23,22 @@ h4 {
   border: 1px solid #ddd;
   background-color: rgba(86,61,124,.15);
   border: 1px solid rgba(86,61,124,.2);
+  margin-left: 10px;
 }
 
 hr {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Resize the columns to give some space in between them */
+#col-days {
+  margin-left: 20px;
+  width: 64%;
+}
+
+.col-inner {
+  width: 97%;
 }
 
 
@@ -44,4 +58,8 @@ hr {
 
 #current-rain-wind {
   text-align: center;
+}
+
+.weather-icon-day {
+  width: 75px;
 }

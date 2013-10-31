@@ -9,23 +9,29 @@
 
     <title>Grid Template for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet">
+    <script type="text/javascript" src="{{url_for('static', filename='js/skycons/skycons.js')}}"></script>
 
-    <!-- Custom styles for this template -->
+    <link href="{{url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/weather.css')}}" rel="stylesheet">
   </head>
 
   <body>
+    <script type="text/javascript">
+      var skycons = new Skycons({"color": "black"});
+    </script>
+
     <div class="container">
 
       <h3>Weather forecast for {{forecast.location.city}}</h3>
       <div class="row">
         <div class="col-md-4">
           <div id="weather-icon-container">
-            <img id="weather-icon" src="{{url_for('static', filename='images/weather-icons/sunny.svg')}}" />
-            <!--Icon: {{forecast.forecast['currently']['icon']}} with {{forecast.forecast['currently']['precipType']}}-->
+            <canvas id="weather-icon" />
+            <script type="text/javascript">
+              skycons.add("weather-icon", {{ forecast.getCurrentWeatherSkyconsConstant() }});
+            </script>
           </div>
+            <!--Icon: {{forecast.forecast['currently']['icon']}} with {{forecast.forecast['currently']['precipType']}}-->
           
           <div id="current-summary">
             {{forecast.forecast['currently']['temperature']}}F and {{forecast.forecast['currently']['summary'].lower()}}
@@ -36,14 +42,19 @@
           </div>
 
           <div class="row">
-            <div class="col-md-12">Hourly</div>
+            <div class="col-md-12 col-inner">Hourly</div>
           </div>
         </div>
 
-        <div class="col-md-8">
+        <div id="col-days" class="col-md-8">
           {% for i in range(0, 5) %}
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 col-inner">
+                <canvas id="weather-icon-day-{{i}}" class="weather-icon-day" />
+                <script type="text/javascript">
+                  skycons.add("weather-icon-day-{{i}}", {{ forecast.getSkyconsConstantForDay(i) }});
+                </script>
+
                 High: {{forecast.forecast['daily']['data'][i]['temperatureMax']}}
                 Low: {{forecast.forecast['daily']['data'][i]['temperatureMin']}}
                 {{forecast.forecast['daily']['data'][i]['summary']}}
@@ -72,5 +83,9 @@
       </div>
 
     </div>
+
+    <script type="text/javascript">
+      skycons.play();
+    </script>
   </body>
 </html>
